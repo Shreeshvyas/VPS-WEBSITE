@@ -1,0 +1,134 @@
+{% extends 'school/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="section-padding bg-light-sec" style="padding: 4rem 0; border-bottom: 1px solid var(--border-color);">
+    <div class="container" style="text-align: center;">
+        <span class="subtitle-badge">Academic Curriculum</span>
+        <h1 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 800; color: var(--text-primary);">Academics & Infrastructure</h1>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 1rem auto 0 auto; font-size: 1.1rem;">Explore our educational roadmap, smart pedagogy methods, and modern campus infrastructure.</p>
+    </div>
+</section>
+
+<!-- Curriculum levels -->
+<section class="section-padding">
+    <div class="container">
+        <div class="section-header">
+            <span class="subtitle-badge">Nurturing Learning</span>
+            <h2>Our Academic Structure</h2>
+            <p>Our curriculum is customized to foster academic rigour, problem solving, creative thinking, and moral strength at every level.</p>
+        </div>
+        
+        <div class="academics-curriculum">
+            <!-- Primary School -->
+            <div class="curriculum-card">
+                <div class="curriculum-icon"><i class="fa-solid fa-shapes"></i></div>
+                <h3>Primary Wing (Grades I - V)</h3>
+                <p>Focuses on basic literacy, numeracy, experiential activities, environmental studies, and creative expression through music and art.</p>
+                <ul class="curriculum-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Play-based learning</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Basic arithmetic & language</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Art & craft activities</li>
+                </ul>
+            </div>
+            
+            <!-- Middle School -->
+            <div class="curriculum-card">
+                <div class="curriculum-icon"><i class="fa-solid fa-square-root-variable"></i></div>
+                <h3>Middle Wing (Grades VI - VIII)</h3>
+                <p>Transitioning to structured sciences, social studies, mathematics, computer programming, and dual languages with sports training.</p>
+                <ul class="curriculum-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Science & Math foundation</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Computer programming labs</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Competitive sports training</li>
+                </ul>
+            </div>
+            
+            <!-- Senior Secondary School -->
+            <div class="curriculum-card">
+                <div class="curriculum-icon"><i class="fa-solid fa-user-astronaut"></i></div>
+                <h3>Senior Wing (Grades IX - XII)</h3>
+                <p>Specialized streams (Science, Commerce, Humanities) prepared for college entrance, laboratory research projects, and leadership roles.</p>
+                <ul class="curriculum-list">
+                    <li><i class="fa-solid fa-circle-check"></i> CBSE / Board exam preparation</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Physics, Chemistry, Biology labs</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Career counselling guides</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Campus Infrastructure List -->
+<section class="section-padding bg-light-sec" style="border-top: 1px solid var(--border-color);">
+    <div class="container">
+        <div class="section-header">
+            <span class="subtitle-badge">Our Infrastructure</span>
+            <h2>Detail of School Facilities</h2>
+            <p>Every facility at {{ school_config.school_name }} is managed to ensure high safety standards and support learning.</p>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 4rem;">
+            {% if facilities %}
+                {% for facility in facilities %}
+                    <div style="display: grid; grid-template-columns: {% if forloop.counter|divisibleby:2 %}1.2fr 0.8fr{% else %}0.8fr 1.2fr{% endif %}; gap: 4rem; align-items: center; background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 24px; padding: 2.5rem; box-shadow: var(--card-shadow);">
+                        {% if not forloop.counter|divisibleby:2 %}
+                            <div style="height: 300px; border-radius: 16px; overflow: hidden; box-shadow: var(--card-shadow);">
+                                {% if facility.image %}
+                                    <img src="{{ facility.image.url }}" alt="{{ facility.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                {% else %}
+                                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop" alt="Campus facility" style="width: 100%; height: 100%; object-fit: cover;">
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="width: 50px; height: 50px; border-radius: 12px; background-color: var(--primary-light); color: var(--primary-color); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                                    {% if facility.icon_name == 'book' %}
+                                        <i class="fa-solid fa-book-open"></i>
+                                    {% elif facility.icon_name == 'microscope' %}
+                                        <i class="fa-solid fa-microscope"></i>
+                                    {% elif facility.icon_name == 'desktop' %}
+                                        <i class="fa-solid fa-desktop"></i>
+                                    {% elif facility.icon_name == 'volleyball' %}
+                                        <i class="fa-solid fa-volleyball"></i>
+                                    {% elif facility.icon_name == 'bus' %}
+                                        <i class="fa-solid fa-bus"></i>
+                                    {% elif facility.icon_name == 'music' %}
+                                        <i class="fa-solid fa-music"></i>
+                                    {% elif facility.icon_name == 'heartbeat' %}
+                                        <i class="fa-solid fa-heart-pulse"></i>
+                                    {% else %}
+                                        <i class="fa-solid fa-school"></i>
+                                    {% endif %}
+                                </div>
+                                <h3 style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700;">{{ facility.title }}</h3>
+                            </div>
+                            <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">{{ facility.description }}</p>
+                            <a href="{% url 'school:contact' %}" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 1.25rem;">Request Campus Tour</a>
+                        </div>
+                        
+                        {% if forloop.counter|divisibleby:2 %}
+                            <div style="height: 300px; border-radius: 16px; overflow: hidden; box-shadow: var(--card-shadow);">
+                                {% if facility.image %}
+                                    <img src="{{ facility.image.url }}" alt="{{ facility.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                {% else %}
+                                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop" alt="Campus facility" style="width: 100%; height: 100%; object-fit: cover;">
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <!-- Default infrastructure block -->
+                <div style="text-align: center; padding: 4rem; color: var(--text-muted);">
+                    <i class="fa-solid fa-cubes" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                    <p>Details about school labs and infrastructure will be uploaded shortly by the administrator.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

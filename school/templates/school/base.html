@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }} | {% endif %}{{ school_config.school_name }}</title>
+    <meta name="description" content="Welcome to {{ school_config.school_name }}. Fostering academic excellence, innovation, and character building. Explore our facilities, faculty, and programs.">
+    
+    <!-- Favicon -->
+    {% if school_config.favicon %}
+        <link rel="shortcut icon" href="{{ school_config.favicon.url }}" type="image/x-icon">
+    {% else %}
+        <link rel="shortcut icon" href="{% static 'school/images/favicon.ico' %}" type="image/x-icon">
+    {% endif %}
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'school/css/style.css' %}">
+</head>
+<body>
+    <!-- Elegant Page Preloader -->
+    <div id="preloader">
+        <div class="preloader-spinner"></div>
+    </div>
+
+    <!-- Top Utility Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="top-info">
+                <span><i class="fa-solid fa-phone"></i> {{ school_config.phone }}</span>
+                <span><i class="fa-solid fa-envelope"></i> {{ school_config.email }}</span>
+            </div>
+            <div class="top-actions">
+                <a href="{% url 'school:contact' %}" class="admission-btn-pulse">Admission open 2026-27</a>
+                <div class="theme-toggle-wrapper">
+                    <button id="theme-toggle" title="Toggle color theme">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="container header-container">
+            <a href="{% url 'school:home' %}" class="logo-area">
+                {% if school_config.logo %}
+                    <img src="{{ school_config.logo.url }}" alt="{{ school_config.school_name }} Logo" class="school-logo">
+                {% else %}
+                    <div class="logo-fallback">
+                        <span class="logo-v">V</span>
+                        <span class="logo-p">P</span>
+                        <span class="logo-s">S</span>
+                    </div>
+                {% endif %}
+                <span class="school-name-text">{{ school_config.school_name }}</span>
+            </a>
+
+            <!-- Mobile Nav Toggle -->
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="{% url 'school:home' %}" class="nav-link {% if request.resolver_match.view_name == 'school:home' %}active{% endif %}">Home</a></li>
+                    <li><a href="{% url 'school:about' %}" class="nav-link {% if request.resolver_match.view_name == 'school:about' %}active{% endif %}">About Us</a></li>
+                    <li><a href="{% url 'school:academics' %}" class="nav-link {% if request.resolver_match.view_name == 'school:academics' %}active{% endif %}">Academics</a></li>
+                    <li><a href="{% url 'school:gallery' %}" class="nav-link {% if request.resolver_match.view_name == 'school:gallery' %}active{% endif %}">Gallery</a></li>
+                    <li><a href="{% url 'school:contact' %}" class="nav-link {% if request.resolver_match.view_name == 'school:contact' %}active{% endif %}">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-col school-desc">
+                <h3>{{ school_config.school_name }}</h3>
+                <p>Nurturing young minds towards a future of leadership, innovation, and social responsibility. Join us to experience education at its finest.</p>
+                <div class="social-links">
+                    {% if school_config.facebook_url %}
+                        <a href="{{ school_config.facebook_url }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    {% endif %}
+                    {% if school_config.twitter_url %}
+                        <a href="{{ school_config.twitter_url }}" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                    {% endif %}
+                    {% if school_config.instagram_url %}
+                        <a href="{{ school_config.instagram_url }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    {% endif %}
+                    {% if school_config.youtube_url %}
+                        <a href="{{ school_config.youtube_url }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="{% url 'school:home' %}">Home</a></li>
+                    <li><a href="{% url 'school:about' %}">About School</a></li>
+                    <li><a href="{% url 'school:academics' %}">Academics & Labs</a></li>
+                    <li><a href="{% url 'school:gallery' %}">School Gallery</a></li>
+                    <li><a href="{% url 'school:contact' %}">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Our Facilities</h4>
+                <ul class="footer-links">
+                    <li><a href="{% url 'school:academics' %}">Smart Classrooms</a></li>
+                    <li><a href="{% url 'school:academics' %}">Science Laboratories</a></li>
+                    <li><a href="{% url 'school:academics' %}">Computer & IT Center</a></li>
+                    <li><a href="{% url 'school:academics' %}">Sports Arena</a></li>
+                    <li><a href="{% url 'school:academics' %}">Library & Info Centre</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col contact-info-col">
+                <h4>Contact Details</h4>
+                <p><i class="fa-solid fa-location-dot"></i> {{ school_config.address }}</p>
+                <p><i class="fa-solid fa-phone"></i> {{ school_config.phone }}</p>
+                <p><i class="fa-solid fa-envelope"></i> {{ school_config.email }}</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container footer-bottom-content">
+                <p>&copy; 2026 {{ school_config.school_name }}. All rights reserved.</p>
+                <p>Designed with <i class="fa-solid fa-heart" style="color: var(--accent-color);"></i> for Academic Excellence</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" title="Go to top" aria-label="Go to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Custom JavaScript -->
+    <script src="{% static 'school/js/main.js' %}"></script>
+</body>
+</html>

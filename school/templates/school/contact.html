@@ -1,0 +1,114 @@
+{% extends 'school/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="section-padding bg-light-sec" style="padding: 4rem 0; border-bottom: 1px solid var(--border-color);">
+    <div class="container" style="text-align: center;">
+        <span class="subtitle-badge">Get In Touch</span>
+        <h1 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 800; color: var(--text-primary);">Contact Our Team</h1>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 1rem auto 0 auto; font-size: 1.1rem;">Have any questions about admission, fees, or academics? Send us a message or visit us on campus.</p>
+    </div>
+</section>
+
+<!-- Contact Form and Details Section -->
+<section class="section-padding">
+    <div class="container">
+        <div class="contact-layout">
+            
+            <!-- Left Info Column -->
+            <div class="contact-info-panel">
+                <span class="subtitle-badge">Office details</span>
+                <h3 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700;">VPS Helpdesk Information</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">For admission queries, parents can visit our helpdesk from Monday to Saturday between 9:00 AM and 2:00 PM.</p>
+                
+                <!-- Address Card -->
+                <div class="contact-info-card">
+                    <div class="contact-icon-box"><i class="fa-solid fa-location-dot"></i></div>
+                    <div class="contact-details-box">
+                        <h4>School Address</h4>
+                        <p>{{ school_config.address }}</p>
+                    </div>
+                </div>
+                
+                <!-- Phone Card -->
+                <div class="contact-info-card">
+                    <div class="contact-icon-box"><i class="fa-solid fa-phone"></i></div>
+                    <div class="contact-details-box">
+                        <h4>Call Center</h4>
+                        <p>Admissions: {{ school_config.phone }}</p>
+                        <p>Administration Office: +91 80 4567 8900</p>
+                    </div>
+                </div>
+                
+                <!-- Email Card -->
+                <div class="contact-info-card">
+                    <div class="contact-icon-box"><i class="fa-solid fa-envelope"></i></div>
+                    <div class="contact-details-box">
+                        <h4>Email Channels</h4>
+                        <p>General inquiries: {{ school_config.email }}</p>
+                        <p>Principal Desk: principal@vyaspublicschool.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Form Column -->
+            <div class="contact-form-panel">
+                <h3>Submit Query Online</h3>
+                <p>Fill out the form below, and our admissions office will reach out within 24 business hours.</p>
+                
+                <form id="school-contact-form" action="{% url 'school:contact_submit' %}" method="post">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="id_name">Full Name <span style="color: var(--danger-color);">*</span></label>
+                        <input type="text" name="name" id="id_name" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label for="id_email">Email Address <span style="color: var(--danger-color);">*</span></label>
+                            <input type="email" name="email" id="id_email" class="form-control" placeholder="e.g. parent@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_phone">Phone Number</label>
+                            <input type="tel" name="phone" id="id_phone" class="form-control" placeholder="e.g. +91 9876543210">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_subject">Subject <span style="color: var(--danger-color);">*</span></label>
+                        <input type="text" name="subject" id="id_subject" class="form-control" placeholder="What is this inquiry about?" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_message">Message Details <span style="color: var(--danger-color);">*</span></label>
+                        <textarea name="message" id="id_message" class="form-control" placeholder="Describe your inquiry details..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: 8px;">
+                        Submit Inquiry Message <i class="fa-solid fa-paper-plane" style="margin-left: 0.5rem;"></i>
+                    </button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- Google Map section -->
+<section class="section-padding map-section" style="padding-top: 0;">
+    <div class="container">
+        <span class="subtitle-badge">Interactive Map</span>
+        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; margin-bottom: 2rem;">Find Our Location</h2>
+        <div class="map-container">
+            {% if school_config.map_embed_url %}
+                <iframe src="{{ school_config.map_embed_url }}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Maps - {{ school_config.school_name }}"></iframe>
+            {% else %}
+                <!-- Default map placeholder (fallback to a central Delhi map, or user can configure) -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.562063853106!2d77.22730797619179!3d28.61291197567406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sIndia%20Gate!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map Placeholder"></iframe>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

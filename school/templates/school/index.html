@@ -1,0 +1,392 @@
+{% extends 'school/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Slider Section -->
+<section class="hero-slider-section" aria-label="School Highlights Banner">
+    <div class="slider-container">
+        {% if hero_sliders %}
+            {% for slide in hero_sliders %}
+                <div class="slide {% if forloop.first %}active{% endif %}">
+                    <img src="{{ slide.image.url }}" alt="{{ slide.title }}" class="slide-image">
+                    <div class="container" style="height: 100%;">
+                        <div class="slide-content">
+                            <div class="slide-glass-panel">
+                                <h2>{{ slide.title }}</h2>
+                                {% if slide.subtitle %}
+                                    <p>{{ slide.subtitle }}</p>
+                                {% endif %}
+                                <div class="slide-actions">
+                                    <a href="{{ slide.action_url }}" class="btn btn-primary">{{ slide.action_text }} <i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <!-- Default Slide if no database sliders exist -->
+            <div class="slide active">
+                <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1920&auto=format&fit=crop" alt="Vyas Public School Campus" class="slide-image">
+                <div class="container" style="height: 100%;">
+                    <div class="slide-content">
+                        <div class="slide-glass-panel">
+                            <h2>Empowering Minds, Shaping Futures</h2>
+                            <p>Welcome to Vyas Public School, where academic excellence meets holistic character development. We nurture future global leaders.</p>
+                            <div class="slide-actions">
+                                <a href="{% url 'school:about' %}" class="btn btn-primary">Discover VPS <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    
+    {% if hero_sliders.count > 1 %}
+        <button class="slider-arrow slider-arrow-left" aria-label="Previous Slide"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="slider-arrow slider-arrow-right" aria-label="Next Slide"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="slider-dots"></div>
+    {% endif %}
+</section>
+
+<!-- Notice Board Ticker -->
+{% if notices %}
+<section class="quick-updates-bar" aria-label="Quick Announcements Ticker">
+    <div class="container updates-content">
+        <span class="updates-badge">Announcements</span>
+        <div class="ticker-wrapper">
+            <div class="ticker-track">
+                {% for notice in notices %}
+                    <span class="ticker-item">
+                        <i class="fa-solid fa-bell"></i> 
+                        <strong>{{ notice.title }}</strong>: {{ notice.content|truncatechars:80 }}
+                        {% if notice.attachment %}
+                            <a href="{{ notice.attachment.url }}" style="color: var(--accent-light); text-decoration: underline;" download>[Download PDF]</a>
+                        {% endif %}
+                    </span>
+                {% endfor %}
+                <!-- Duplicate for infinite effect -->
+                {% for notice in notices %}
+                    <span class="ticker-item">
+                        <i class="fa-solid fa-bell"></i> 
+                        <strong>{{ notice.title }}</strong>: {{ notice.content|truncatechars:80 }}
+                    </span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Principal Message Section -->
+<section class="section-padding">
+    <div class="ambient-glow-1"></div>
+    <div class="container">
+        <div class="about-welcome-grid">
+            <div class="about-welcome-image-wrapper">
+                {% if school_config.principal_photo %}
+                    <img src="{{ school_config.principal_photo.url }}" alt="Principal {{ school_config.principal_name }}" class="about-main-image">
+                {% else %}
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop" alt="Principal" class="about-main-image">
+                {% endif %}
+                <div class="about-experience-badge">
+                    <h3>{{ school_config.stat_experience }}+</h3>
+                    <p>Years of Legacy</p>
+                </div>
+            </div>
+            
+            <div class="about-welcome-content">
+                <span class="subtitle-badge">Leadership Desk</span>
+                <h3>{{ school_config.principal_title }}</h3>
+                <div class="highlight-box">
+                    "{{ school_config.principal_message|truncatewords:45 }}"
+                </div>
+                <p>At {{ school_config.school_name }}, we focus on child-centric learning methods that foster deep critical thinking, creativity, and moral integrity. Our students are encouraged to ask questions, explore science, sports, and arts, and grow as empathetic citizens of the world.</p>
+                <div style="display: flex; flex-direction: column; margin-bottom: 2rem;">
+                    <strong style="font-size: 1.15rem; color: var(--text-primary);">{{ school_config.principal_name }}</strong>
+                    <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Principal, {{ school_config.school_name }}</span>
+                </div>
+                <a href="{% url 'school:about' %}" class="btn btn-secondary">Read Full Message</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistics counters -->
+<section class="stats-section" aria-label="Key Highlights Statistics">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <div class="stat-number" data-target="{{ school_config.stat_students }}" data-suffix="+">0</div>
+                <div class="stat-label">Enrolled Students</div>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <div class="stat-number" data-target="{{ school_config.stat_teachers }}" data-suffix="+">0</div>
+                <div class="stat-label">Expert Educators</div>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-flask"></i>
+                <div class="stat-number" data-target="{{ school_config.stat_labs }}">0</div>
+                <div class="stat-label">Modern Labs</div>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-award"></i>
+                <div class="stat-number" data-target="{{ school_config.stat_experience }}" data-suffix="+">0</div>
+                <div class="stat-label">Years of Excellence</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Facilities Highlights -->
+<section class="section-padding">
+    <div class="ambient-glow-2"></div>
+    <div class="container">
+        <div class="section-header">
+            <span class="subtitle-badge">State-Of-The-Art</span>
+            <h2>Our World Class Facilities</h2>
+            <p>We provide a comprehensive infrastructure designed to support students' academic, physical, and creative endeavors.</p>
+        </div>
+        
+        <div class="facilities-grid">
+            {% if facilities %}
+                {% for facility in facilities|slice:":3" %}
+                    <div class="facility-card">
+                        <div class="facility-img-wrapper">
+                            {% if facility.image %}
+                                <img src="{{ facility.image.url }}" alt="{{ facility.title }}">
+                            {% else %}
+                                <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=600&auto=format&fit=crop" alt="Facility Image">
+                            {% endif %}
+                            <div class="facility-icon-badge">
+                                {% if facility.icon_name == 'book' %}
+                                    <i class="fa-solid fa-book-open"></i>
+                                {% elif facility.icon_name == 'microscope' %}
+                                    <i class="fa-solid fa-microscope"></i>
+                                {% elif facility.icon_name == 'desktop' %}
+                                    <i class="fa-solid fa-desktop"></i>
+                                {% elif facility.icon_name == 'volleyball' %}
+                                    <i class="fa-solid fa-volleyball"></i>
+                                {% elif facility.icon_name == 'bus' %}
+                                    <i class="fa-solid fa-bus"></i>
+                                {% elif facility.icon_name == 'music' %}
+                                    <i class="fa-solid fa-music"></i>
+                                {% elif facility.icon_name == 'heartbeat' %}
+                                    <i class="fa-solid fa-heart-pulse"></i>
+                                {% else %}
+                                    <i class="fa-solid fa-school"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="facility-body">
+                            <h3>{{ facility.title }}</h3>
+                            <p>{{ facility.description|truncatechars:120 }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <!-- Default facilities placeholders -->
+                <div class="facility-card">
+                    <div class="facility-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=600&auto=format&fit=crop" alt="Library">
+                        <div class="facility-icon-badge"><i class="fa-solid fa-book-open"></i></div>
+                    </div>
+                    <div class="facility-body">
+                        <h3>Resource Library</h3>
+                        <p>A library containing over 10,000 reference guides, encyclopedias, digital research archives, and fiction titles.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <div class="facility-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop" alt="Computer Lab">
+                        <div class="facility-icon-badge"><i class="fa-solid fa-desktop"></i></div>
+                    </div>
+                    <div class="facility-body">
+                        <h3>Advanced IT Center</h3>
+                        <p>Fully air-conditioned computer laboratory equipped with high-speed internet connections and coding software.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <div class="facility-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=600&auto=format&fit=crop" alt="Sports Center">
+                        <div class="facility-icon-badge"><i class="fa-solid fa-volleyball"></i></div>
+                    </div>
+                    <div class="facility-body">
+                        <h3>Sports Infrastructure</h3>
+                        <p>Multiple courts for tennis, basketball, a grass football pitch, and indoor rooms for table tennis and chess.</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="{% url 'school:academics' %}" class="btn btn-secondary">Explore All Facilities <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- Notices & Events Side-by-side -->
+<section class="section-padding bg-light-sec" aria-label="Notices and Upcoming Events">
+    <div class="container">
+        <div class="home-notices-events-grid">
+            <!-- Notices Left Column -->
+            <div class="notice-board-container">
+                <div class="board-header">
+                    <h3><i class="fa-solid fa-clipboard-list"></i> Notice Board</h3>
+                    <span style="font-size: 0.8rem; font-weight: 600; color: var(--primary-color);">LATEST ANNOUNCEMENTS</span>
+                </div>
+                
+                <div class="notice-list">
+                    {% if notices %}
+                        {% for notice in notices %}
+                            <article class="notice-card {% if notice.is_urgent %}urgent-notice-highlight{% endif %}" aria-label="Notice Item: {{ notice.title }}">
+                                <div class="notice-meta">
+                                    <time datetime="{{ notice.created_at|date:'Y-m-d' }}" class="notice-date">{{ notice.created_at|date:"d M, Y" }}</time>
+                                    {% if notice.is_urgent %}
+                                        <span class="urgent-badge">Urgent</span>
+                                    {% endif %}
+                                </div>
+                                <h4>{{ notice.title }}</h4>
+                                <p>{{ notice.content }}</p>
+                                {% if notice.attachment %}
+                                    <a href="{{ notice.attachment.url }}" class="notice-attachment" target="_blank" download>
+                                        <i class="fa-solid fa-file-pdf"></i> Download Attachment (PDF)
+                                    </a>
+                                {% endif %}
+                            </article>
+                        {% endfor %}
+                    {% else %}
+                        <div style="text-align: center; color: var(--text-muted); padding: 3rem 0;">
+                            <i class="fa-solid fa-inbox" style="font-size: 2.5rem; margin-bottom: 1rem;"></i>
+                            <p>No active notices at this time.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Events Right Column -->
+            <div>
+                <h3 class="board-header" style="border-bottom: 2px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem; font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-calendar-days" style="color: var(--primary-color);"></i> School Events
+                </h3>
+                
+                <div class="upcoming-events-container">
+                    {% if events %}
+                        {% for event in events %}
+                            <div class="event-item-card">
+                                <div class="event-date-box">
+                                    <span class="event-date-day">{{ event.date|date:"d" }}</span>
+                                    <span class="event-date-month">{{ event.date|date:"b" }}</span>
+                                </div>
+                                <div class="event-info">
+                                    <h4>{{ event.title }}</h4>
+                                    <p>{{ event.description|truncatechars:90 }}</p>
+                                    <div class="event-location"><i class="fa-solid fa-location-dot"></i> {{ event.location }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <!-- Default events -->
+                        <div class="event-item-card">
+                            <div class="event-date-box">
+                                <span class="event-date-day">15</span>
+                                <span class="event-date-month">Aug</span>
+                            </div>
+                            <div class="event-info">
+                                <h4>Independence Day Celebration</h4>
+                                <p>Join us on campus for cultural programs, speeches, and patriotic musical acts starting at 8:00 AM.</p>
+                                <div class="event-location"><i class="fa-solid fa-location-dot"></i> Main Ground</div>
+                            </div>
+                        </div>
+                        <div class="event-item-card">
+                            <div class="event-date-box">
+                                <span class="event-date-day">05</span>
+                                <span class="event-date-month">Sep</span>
+                            </div>
+                            <div class="event-info">
+                                <h4>Teacher's Day Ceremony</h4>
+                                <p>Students are organizing a grand felicitation show to express gratitude to our amazing teaching faculty.</p>
+                                <div class="event-location"><i class="fa-solid fa-location-dot"></i> Seminar Hall</div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Photo Gallery overview -->
+<section class="section-padding">
+    <div class="ambient-glow-1"></div>
+    <div class="container">
+        <div class="section-header">
+            <span class="subtitle-badge">Memories & Highlights</span>
+            <h2>Glimpses of School Life</h2>
+            <p>Capture the vibrant campus life, celebrations, inter-school competitions, and co-curricular programs.</p>
+        </div>
+        
+        <div class="gallery-grid">
+            {% if gallery_images %}
+                {% for image in gallery_images %}
+                    <div class="gallery-item" data-category="{{ image.category.slug }}">
+                        <img src="{{ image.image.url }}" alt="{{ image.caption|default:'Gallery Image' }}">
+                        <div class="gallery-overlay">
+                            <span>{{ image.category.name }}</span>
+                            <h4>{{ image.caption|default:'School Event' }}</h4>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <!-- Default mock gallery grid -->
+                <div class="gallery-item" data-category="sports">
+                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=400&auto=format&fit=crop" alt="Sports Day">
+                    <div class="gallery-overlay">
+                        <span>Sports</span>
+                        <h4>Annual Athletics Meet</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="science">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=400&auto=format&fit=crop" alt="Science Exhibition">
+                    <div class="gallery-overlay">
+                        <span>Science</span>
+                        <h4>Vyas Science & Coding Fair</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="cultural">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=400&auto=format&fit=crop" alt="Dance Competition">
+                    <div class="gallery-overlay">
+                        <span>Cultural</span>
+                        <h4>Independence Day Dance</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="classroom">
+                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=400&auto=format&fit=crop" alt="Classroom activities">
+                    <div class="gallery-overlay">
+                        <span>Classroom</span>
+                        <h4>Smart Classroom Learning</h4>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="{% url 'school:gallery' %}" class="btn btn-primary">Open Full Media Gallery</a>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Banner -->
+<section class="section-padding bg-light-sec" style="border-top: 1px solid var(--border-color); text-align: center;">
+    <div class="container" style="max-width: 800px;">
+        <h2 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.02em;">Enroll Your Child at VPS Today</h2>
+        <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem;">Admissions are currently open for the academic session 2026-27 from Pre-Nursery to Grade XII. Schedule a campus tour or query online now.</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="{% url 'school:contact' %}" class="btn btn-primary">Inquire Online Now</a>
+            <a href="{% url 'school:about' %}" class="btn btn-secondary">Learn About Admission Policies</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

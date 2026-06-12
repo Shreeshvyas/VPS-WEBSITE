@@ -1,0 +1,72 @@
+{% extends 'school/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="section-padding bg-light-sec" style="padding: 4rem 0; border-bottom: 1px solid var(--border-color);">
+    <div class="container" style="text-align: center;">
+        <span class="subtitle-badge">Media Room</span>
+        <h1 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 800; color: var(--text-primary);">School Media Gallery</h1>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 1rem auto 0 auto; font-size: 1.1rem;">Explore highlights of celebrations, sports activities, laboratory projects, and student art.</p>
+    </div>
+</section>
+
+<!-- Gallery Filter and Grid -->
+<section class="section-padding">
+    <div class="container">
+        
+        <!-- Category Filtering Menu -->
+        <div class="gallery-filter-menu" role="tablist" aria-label="Gallery Categories">
+            <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Photos</button>
+            {% for category in categories %}
+                <button class="filter-btn" data-filter="{{ category.slug }}" role="tab" aria-selected="false">{{ category.name }}</button>
+            {% endfor %}
+        </div>
+        
+        <!-- Image Grid -->
+        <div class="gallery-grid" aria-label="School Photo Grid">
+            {% if gallery_images %}
+                {% for image in gallery_images %}
+                    <div class="gallery-item" data-category="{{ image.category.slug }}" role="button" aria-label="View larger image: {{ image.caption }}">
+                        <img src="{{ image.image.url }}" alt="{{ image.caption|default:'School Photo' }}">
+                        <div class="gallery-overlay">
+                            <span>{{ image.category.name }}</span>
+                            <h4>{{ image.caption|default:'School Activity' }}</h4>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <!-- Placeholders if gallery is empty -->
+                <div class="gallery-item" data-category="sports">
+                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=400&auto=format&fit=crop" alt="Sports Day">
+                    <div class="gallery-overlay">
+                        <span>Sports</span>
+                        <h4>Annual Athletics Meet</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="science">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=400&auto=format&fit=crop" alt="Science Exhibition">
+                    <div class="gallery-overlay">
+                        <span>Science</span>
+                        <h4>Vyas Science & Coding Fair</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="cultural">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=400&auto=format&fit=crop" alt="Dance Competition">
+                    <div class="gallery-overlay">
+                        <span>Cultural</span>
+                        <h4>Independence Day Dance</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="classroom">
+                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=400&auto=format&fit=crop" alt="Classroom activities">
+                    <div class="gallery-overlay">
+                        <span>Classroom</span>
+                        <h4>Smart Classroom Learning</h4>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

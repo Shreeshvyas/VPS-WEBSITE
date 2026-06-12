@@ -1,0 +1,145 @@
+{% extends 'school/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="section-padding bg-light-sec" style="padding: 4rem 0; border-bottom: 1px solid var(--border-color);">
+    <div class="container" style="text-align: center;">
+        <span class="subtitle-badge">Introduction</span>
+        <h1 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 800; color: var(--text-primary);">About Our School</h1>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 1rem auto 0 auto; font-size: 1.1rem;">Discover our legacy, pedagogical philosophy, and meet the professional team guiding our students.</p>
+    </div>
+</section>
+
+<!-- History & Welcome -->
+<section class="section-padding">
+    <div class="container">
+        <div class="about-welcome-grid">
+            <div class="about-welcome-content">
+                <span class="subtitle-badge">Vyas Legacy</span>
+                <h3>Nurturing Scholars Since 2001</h3>
+                <p>Founded with a progressive vision, {{ school_config.school_name }} has been a pillar of educational excellence for more than two decades. We maintain a high standard of academic performance, balancing it with comprehensive co-curricular options such as robotics, debate, pottery, football, and fine arts.</p>
+                <p>We believe in a smart-learning ecosystem. Our state-of-the-art facilities ensure students learn through hands-on experimentation. From our well-stocked computer labs to our specialized physics, chemistry, and biology setups, we enable student interest to drive learning.</p>
+                <p>At {{ school_config.school_name }}, safety is paramount. The campus is monitored via 24/7 CCTV setups, and our school transport buses are equipped with GPS tracking and supervised caretakers.</p>
+            </div>
+            <div class="about-welcome-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=800&auto=format&fit=crop" alt="School Building" class="about-main-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission & Vision Section -->
+<section class="section-padding bg-light-sec" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+        <div class="about-welcome-grid" style="align-items: stretch;">
+            <!-- Vision -->
+            <div style="background-color: var(--card-bg); border: 1px solid var(--border-color); padding: 3rem 2rem; border-radius: 20px; box-shadow: var(--card-shadow);">
+                <div style="width: 60px; height: 60px; border-radius: 12px; background-color: var(--primary-light); color: var(--primary-color); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 1.5rem;">
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Our Vision</h3>
+                <p style="color: var(--text-secondary); line-height: 1.7; font-size: 1rem;">{{ school_config.vision }}</p>
+            </div>
+            
+            <!-- Mission -->
+            <div style="background-color: var(--card-bg); border: 1px solid var(--border-color); padding: 3rem 2rem; border-radius: 20px; box-shadow: var(--card-shadow);">
+                <div style="width: 60px; height: 60px; border-radius: 12px; background-color: var(--accent-light); color: var(--accent-color); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 1.5rem;">
+                    <i class="fa-solid fa-bullseye"></i>
+                </div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Our Mission</h3>
+                <p style="color: var(--text-secondary); line-height: 1.7; font-size: 1rem;">{{ school_config.mission }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Principal message in detail -->
+<section class="section-padding">
+    <div class="container">
+        <div class="about-welcome-grid" style="grid-template-columns: 0.8fr 1.2fr;">
+            <div style="text-align: center;">
+                {% if school_config.principal_photo %}
+                    <img src="{{ school_config.principal_photo.url }}" alt="{{ school_config.principal_name }}" style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover; object-position: center top; border: 5px solid var(--primary-light); margin: 0 auto 1.5rem auto; box-shadow: var(--card-shadow);">
+                {% else %}
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop" alt="Principal" style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover; object-position: center top; border: 5px solid var(--primary-light); margin: 0 auto 1.5rem auto; box-shadow: var(--card-shadow);">
+                {% endif %}
+                <h4 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700;">{{ school_config.principal_name }}</h4>
+                <p style="color: var(--primary-color); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; margin-top: 0.2rem;">Principal Message</p>
+            </div>
+            
+            <div>
+                <span class="subtitle-badge">Leadership Philosophy</span>
+                <h3 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">{{ school_config.principal_title }}</h3>
+                <div style="color: var(--text-secondary); display: flex; flex-direction: column; gap: 1.25rem; font-size: 1.05rem;">
+                    {{ school_config.principal_message|linebreaks }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Teacher / Staff Directory -->
+<section class="section-padding bg-light-sec" style="border-top: 1px solid var(--border-color);">
+    <div class="container">
+        <div class="section-header">
+            <span class="subtitle-badge">Faculty Panel</span>
+            <h2>Meet Our Expert Teachers</h2>
+            <p>Our teachers are well-qualified, passionate educators committed to inspiring student performance and character development.</p>
+        </div>
+        
+        <div class="teachers-grid">
+            {% if teachers %}
+                {% for teacher in teachers %}
+                    <div class="teacher-card">
+                        <div class="teacher-img-wrapper">
+                            {% if teacher.photo %}
+                                <img src="{{ teacher.photo.url }}" alt="{{ teacher.name }}">
+                            {% else %}
+                                <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=200&auto=format&fit=crop" alt="Teacher Headshot">
+                            {% endif %}
+                        </div>
+                        <h3>{{ teacher.name }}</h3>
+                        <div class="teacher-role">{{ teacher.designation }}</div>
+                        <div class="teacher-qualification">{{ teacher.qualification }}</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <!-- Placeholders if no teachers in database -->
+                <div class="teacher-card">
+                    <div class="teacher-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=200&auto=format&fit=crop" alt="Teacher">
+                    </div>
+                    <h3>Mrs. Anita Sharma</h3>
+                    <div class="teacher-role">HOD English Literature</div>
+                    <div class="teacher-qualification">M.A. English, B.Ed. (15 yrs exp)</div>
+                </div>
+                <div class="teacher-card">
+                    <div class="teacher-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop" alt="Teacher">
+                    </div>
+                    <h3>Mr. Vikram Adiga</h3>
+                    <div class="teacher-role">TGT Mathematics</div>
+                    <div class="teacher-qualification">M.Sc. Mathematics, B.Ed. (10 yrs exp)</div>
+                </div>
+                <div class="teacher-card">
+                    <div class="teacher-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="Teacher">
+                    </div>
+                    <h3>Dr. Preeti Verma</h3>
+                    <div class="teacher-role">PGT Chemistry</div>
+                    <div class="teacher-qualification">Ph.D. Chemistry, B.Ed. (12 yrs exp)</div>
+                </div>
+                <div class="teacher-card">
+                    <div class="teacher-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" alt="Teacher">
+                    </div>
+                    <h3>Mr. John D'Souza</h3>
+                    <div class="teacher-role">Physical Education Instructor</div>
+                    <div class="teacher-qualification">B.P.Ed. (8 yrs exp)</div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
