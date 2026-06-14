@@ -9,36 +9,12 @@
             {% for slide in hero_sliders %}
                 <div class="slide {% if forloop.first %}active{% endif %}">
                     <img src="{{ slide.image.url }}" alt="{{ slide.title }}" class="slide-image">
-                    <div class="container" style="height: 100%;">
-                        <div class="slide-content">
-                            <div class="slide-glass-panel">
-                                <h2>{{ slide.title }}</h2>
-                                {% if slide.subtitle %}
-                                    <p>{{ slide.subtitle }}</p>
-                                {% endif %}
-                                <div class="slide-actions">
-                                    <a href="{{ slide.action_url }}" class="btn btn-primary">{{ slide.action_text }} <i class="fa-solid fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             {% endfor %}
         {% else %}
             <!-- Default Slide if no database sliders exist -->
             <div class="slide active">
                 <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1920&auto=format&fit=crop" alt="Vyas Public School Campus" class="slide-image">
-                <div class="container" style="height: 100%;">
-                    <div class="slide-content">
-                        <div class="slide-glass-panel">
-                            <h2>Empowering Minds, Shaping Futures</h2>
-                            <p>Welcome to Vyas Public School, where academic excellence meets holistic character development. We nurture future global leaders.</p>
-                            <div class="slide-actions">
-                                <a href="{% url 'school:about' %}" class="btn btn-primary">Discover VPS <i class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         {% endif %}
     </div>
@@ -50,68 +26,136 @@
     {% endif %}
 </section>
 
-<!-- Notice Board Ticker -->
-{% if notices %}
-<section class="quick-updates-bar" aria-label="Quick Announcements Ticker">
-    <div class="container updates-content">
-        <span class="updates-badge">Announcements</span>
-        <div class="ticker-wrapper">
-            <div class="ticker-track">
-                {% for notice in notices %}
-                    <span class="ticker-item">
-                        <i class="fa-solid fa-bell"></i> 
-                        <strong>{{ notice.title }}</strong>: {{ notice.content|truncatechars:80 }}
-                        {% if notice.attachment %}
-                            <a href="{{ notice.attachment.url }}" style="color: var(--accent-light); text-decoration: underline;" download>[Download PDF]</a>
-                        {% endif %}
-                    </span>
-                {% endfor %}
-                <!-- Duplicate for infinite effect -->
-                {% for notice in notices %}
-                    <span class="ticker-item">
-                        <i class="fa-solid fa-bell"></i> 
-                        <strong>{{ notice.title }}</strong>: {{ notice.content|truncatechars:80 }}
-                    </span>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</section>
-{% endif %}
-
-<!-- Principal Message Section -->
-<section class="section-padding">
-    <div class="ambient-glow-1"></div>
+<!-- Founders Section -->
+<section class="section-padding founders-section-wrapper" style="position: relative; overflow: hidden; background: var(--bg-tertiary);">
+    <div class="ambient-glow-founder" style="position: absolute; top: -10%; left: 30%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(13, 148, 136, 0.08) 0%, transparent 70%); pointer-events: none;"></div>
     <div class="container">
-        <div class="about-welcome-grid">
-            <div class="about-welcome-image-wrapper">
-                {% if school_config.principal_photo %}
-                    <img src="{{ school_config.principal_photo.url }}" alt="Principal {{ school_config.principal_name }}" class="about-main-image">
-                {% else %}
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop" alt="Principal" class="about-main-image">
-                {% endif %}
-                <div class="about-experience-badge">
-                    <h3>{{ school_config.stat_experience }}+</h3>
-                    <p>Years of Legacy</p>
+        <div class="section-header" style="text-align: center; margin-bottom: 4rem;">
+            <span class="subtitle-badge">Our Pillars of Strength</span>
+            <h2>Our Illustrious Founders & Visionaries</h2>
+            <p style="max-width: 800px; margin: 1.2rem auto 0 auto;">Establishing Vyas Public School in 1995, their ultimate dedication and visionary leadership laid the cornerstone of our academic legacy, nurturing it into a beacon of modern education.</p>
+        </div>
+        
+        <div class="founders-grid">
+            <!-- Founder 1: NK Vyas -->
+            <div class="founder-card scroll-reveal">
+                <div class="founder-img-container">
+                    <img src="/media/school/Nandkishore Vyas.png" alt="Shri Nandkishore Vyas" class="founder-img">
+                    <div class="founder-award-badge">
+                        <i class="fa-solid fa-award"></i>
+                        <span>Sahitya Ratan • Rashtrapati Awardee</span>
+                    </div>
+                </div>
+                <div class="founder-info">
+                    <span class="founder-role">Founder & Visionary</span>
+                    <h3>Shri Nandkishore Vyas <span class="founder-initials">(N.K. Vyas)</span></h3>
+                    <div class="founder-qualifications">
+                        <span class="qual-badge">B.Sc</span>
+                        <span class="qual-badge">M.A. (Hindi + Pol. Science)</span>
+                        <span class="qual-badge">Literature English</span>
+                        <span class="qual-badge">B.Ed.</span>
+                    </div>
+                    <p class="founder-bio">
+                        A distinguished scholar, prolific litterateur, and visionary educator, Shri Nandkishore Vyas was honored by the President of India with the prestigious 'Sahitya Ratan'. His deep academic expertise and passion for language and literature shaped the educational ethos of Vyas Public School. Under his guidance, the institution pioneered holistic development, bridging traditional values with scientific inquiry.
+                    </p>
                 </div>
             </div>
             
-            <div class="about-welcome-content">
-                <span class="subtitle-badge">Leadership Desk</span>
-                <h3>{{ school_config.principal_title }}</h3>
-                <div class="highlight-box">
-                    "{{ school_config.principal_message|truncatewords:45 }}"
+            <!-- Founder 2: Shushila Devi Vyas -->
+            <div class="founder-card scroll-reveal">
+                <div class="founder-img-container">
+                    <img src="/media/school/Shushila Devi Vyas.png" alt="Smt. Shushila Devi Vyas" class="founder-img">
                 </div>
-                <p>At {{ school_config.school_name }}, we focus on child-centric learning methods that foster deep critical thinking, creativity, and moral integrity. Our students are encouraged to ask questions, explore science, sports, and arts, and grow as empathetic citizens of the world.</p>
-                <div style="display: flex; flex-direction: column; margin-bottom: 2rem;">
-                    <strong style="font-size: 1.15rem; color: var(--text-primary);">{{ school_config.principal_name }}</strong>
-                    <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Principal, {{ school_config.school_name }}</span>
+                <div class="founder-info">
+                    <span class="founder-role">Founder & Pillar of Strength</span>
+                    <h3>Smt. Shushila Devi Vyas</h3>
+                    <div class="founder-qualifications">
+                        <span class="qual-badge">B.A. (Hindi)</span>
+                        <span class="qual-badge">M.A. (Hindi)</span>
+                        <span class="qual-badge">B.Ed.</span>
+                    </div>
+                    <p class="founder-bio">
+                        Co-establishing the school in 1995, Smt. Shushila Devi Vyas has been the cornerstone of the school's growth. With her academic credentials in language education, she spearheaded administrative excellence and created a nurturing environment. Her dedication to the welfare of teachers and students alike has built a legacy of warmth, discipline, and high moral integrity.
+                    </p>
                 </div>
-                <a href="{% url 'school:about' %}" class="btn btn-secondary">Read Full Message</a>
+            </div>
+        </div>
+        
+        <div class="founders-tribute-message scroll-reveal">
+            <i class="fa-solid fa-quote-left tribute-quote-icon"></i>
+            <p>
+                Established in 1995, the journey of Vyas Public School was paved by the untiring efforts, passion, and deep wisdom of our founders. Together, they did not just open a school; they created a temple of learning. Every milestone we achieve today stands on the solid foundation of excellence they built. We owe the current heights and prestige of this institution to their everlasting credit and vision.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Leadership Section -->
+<section class="section-padding leadership-section" style="position: relative; overflow: hidden; background: var(--bg-secondary);">
+    <div class="ambient-glow-leadership" style="position: absolute; top: -10%; right: -10%; width: 40vw; height: 40vw; background: radial-gradient(circle, rgba(13, 148, 136, 0.05) 0%, transparent 70%); pointer-events: none;"></div>
+    <div class="container">
+        <div class="section-header" style="text-align: center; margin-bottom: 4rem;">
+            <span class="subtitle-badge">Leadership Desk</span>
+            <h2>Our Leadership Team</h2>
+            <p style="max-width: 800px; margin: 1.2rem auto 0 auto;">Dedicated visionaries guiding Vyas Public School towards excellence in education, character building, and holistic development.</p>
+        </div>
+        
+        <div class="leadership-grid">
+            <!-- Leader 1: Director -->
+            <div class="leader-card scroll-reveal">
+                <div class="leader-img-container">
+                    <img src="/media/school/director_sanjay.jpg" alt="Director Mr. Sanjay Vyas" class="leader-img">
+                </div>
+                <div class="leader-info">
+                    <span class="leader-role">Director</span>
+                    <h3>Mr. Sanjay Vyas</h3>
+                    <div class="leader-qualification">Director</div>
+                    <div class="leader-quote">
+                        <i class="fa-solid fa-quote-left"></i>
+                        <p>Education is not just about academic achievement but about shaping character. We strive to create an environment where every child can discover their potential and develop into confident individuals.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Leader 2: Principal -->
+            <div class="leader-card scroll-reveal">
+                <div class="leader-img-container">
+                    {% if school_config.principal_photo %}
+                        <img src="{{ school_config.principal_photo.url }}" alt="Principal {{ school_config.principal_name }}" class="leader-img">
+                    {% else %}
+                        <img src="/media/school/principal_new.png" alt="Principal" class="leader-img">
+                    {% endif %}
+                </div>
+                <div class="leader-info">
+                    <span class="leader-role">Principal</span>
+                    <h3>Mr. {{ school_config.principal_name }}</h3>
+                    <div class="leader-qualification">B.Sc(C.S) + M.Sc(C.S) + B.Ed</div>
+                    <div class="leader-quote">
+                        <i class="fa-solid fa-quote-left"></i>
+                        <p>We focus on child-centric learning methods that foster deep critical thinking, creativity, and moral integrity. Our students are encouraged to grow as empathetic citizens of the world.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Leader 3: Vice Principal -->
+            <div class="leader-card scroll-reveal">
+                <div class="leader-img-container">
+                    <img src="/media/teachers/teacher6.jpg" alt="Vice Principal Mrs. Yogita Vyas" class="leader-img">
+                </div>
+                <div class="leader-info">
+                    <span class="leader-role">Vice Principal</span>
+                    <h3>Mrs. Yogita Vyas</h3>
+                    <div class="leader-qualification">B.A., M.A., D.El.Ed</div>
+                    <div class="leader-quote">
+                        <i class="fa-solid fa-quote-left"></i>
+                        <p>Fostering academic excellence and collaborative learning in a nurturing environment. We work closely with our students and parents to build a strong community of future leaders.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- Statistics counters -->
 <section class="stats-section" aria-label="Key Highlights Statistics">
@@ -389,4 +433,59 @@
         </div>
     </div>
 </section>
+
+<!-- Promotion Modal Overlay -->
+<div id="promo-modal" class="promo-modal-overlay">
+    <div class="promo-modal-card">
+        <button id="promo-close" class="promo-modal-close" aria-label="Close Popup"><i class="fa-solid fa-xmark"></i></button>
+        <div class="promo-modal-grid">
+            <!-- Left Side: Admission Info -->
+            <div class="promo-admission-col">
+                <div class="promo-admission-header">
+                    <span class="promo-admission-badge"><i class="fa-solid fa-graduation-cap"></i> ADMISSION OPEN 2026-27</span>
+                    <span class="pulse-indicator"></span>
+                </div>
+                <h2>Shape Your Child's Future</h2>
+                <p>Join Vyas Public School for a journey of academic excellence, innovation, and character building. Secure your seat today!</p>
+                
+                <div class="promo-contact-info">
+                    <span class="contact-label"><i class="fa-solid fa-headset"></i> Admission Helpdesk:</span>
+                    <a href="tel:8717860914" class="promo-phone-btn"><i class="fa-solid fa-phone-volume"></i> 8717860914</a>
+                    <a href="tel:9977956175" class="promo-phone-btn"><i class="fa-solid fa-phone-volume"></i> 9977956175</a>
+                </div>
+                
+                <div class="promo-action-buttons">
+                    <a href="{% url 'school:contact' %}" class="btn btn-primary promo-cta-btn">Apply / Inquire Online <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Right Side: Toppers Display -->
+            <div class="promo-toppers-col">
+                <div class="promo-toppers-header">
+                    <div class="toppers-trophy"><i class="fa-solid fa-trophy"></i></div>
+                    <h3>Our Academic Champions</h3>
+                    <p class="promo-toppers-subtitle">VPS shines with pride! Celebrating our board toppers.</p>
+                </div>
+                <div class="promo-toppers-grid">
+                    <!-- 10th Topper -->
+                    <div class="promo-topper-item">
+                        <div class="promo-topper-img-frame">
+                            <img src="/media/school/topper_10th.jpg" alt="Class X Topper - 98.4%" class="lightbox-trigger">
+                            <span class="topper-badge class-10th">Class X • 98.4%</span>
+                        </div>
+                        <h4>Board Merit Topper</h4>
+                    </div>
+                    <!-- 12th Topper -->
+                    <div class="promo-topper-item">
+                        <div class="promo-topper-img-frame">
+                            <img src="/media/school/topper_12th.jpg" alt="Class XII Topper - 97.6%" class="lightbox-trigger">
+                            <span class="topper-badge class-12th">Class XII • 97.6%</span>
+                        </div>
+                        <h4>Board Merit Topper</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

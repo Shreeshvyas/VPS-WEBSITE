@@ -470,3 +470,84 @@ window.addEventListener('load', () => {
         }, 500);
     }
 });
+
+// 12. PROMO MODAL POPUP
+window.addEventListener('load', () => {
+    const promoModal = document.getElementById('promo-modal');
+    const promoClose = document.getElementById('promo-close');
+    
+    if (promoModal && promoClose) {
+        // Show the popup automatically with a slight delay after preloader completes on every reload
+        setTimeout(() => {
+            promoModal.classList.add('show');
+        }, 1500);
+        
+        // Close modal on close button click
+        promoClose.addEventListener('click', () => {
+            promoModal.classList.remove('show');
+        });
+        
+        // Close modal on background overlay click
+        promoModal.addEventListener('click', (e) => {
+            if (e.target === promoModal) {
+                promoModal.classList.remove('show');
+            }
+        });
+    }
+});
+
+// 13. GLOBAL IMAGE LIGHTBOX
+document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('global-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = lightbox ? lightbox.querySelector('.lightbox-close') : null;
+    
+    if (lightbox && lightboxImg && lightboxClose) {
+        // Query all click-to-view images
+        const imageSelectors = '.slide-image, .founder-img, .leader-img, .promo-topper-img-frame img, .gallery-item img, .about-main-image';
+        
+        const setupLightbox = () => {
+            const images = document.querySelectorAll(imageSelectors);
+            images.forEach(img => {
+                if (img.dataset.lightboxBound) return;
+                img.dataset.lightboxBound = "true";
+                
+                img.addEventListener('click', () => {
+                    lightboxImg.src = img.src;
+                    let captionText = img.alt || '';
+                    if (captionText.toLowerCase().includes('placeholder') || captionText.toLowerCase().includes('image')) {
+                        captionText = '';
+                    }
+                    lightboxCaption.innerText = captionText;
+                    lightbox.classList.add('show');
+                });
+            });
+        };
+        
+        // Initial binding
+        setupLightbox();
+        
+        // Periodic rebinding for dynamically loaded elements
+        setInterval(setupLightbox, 2000);
+        
+        // Close on button click
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('show');
+        });
+        
+        // Close on background overlay click
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+                lightbox.classList.remove('show');
+            }
+        });
+        
+        // Close on ESC key press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('show')) {
+                lightbox.classList.remove('show');
+            }
+        });
+    }
+});

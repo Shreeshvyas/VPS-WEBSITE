@@ -460,7 +460,6 @@ li {
     z-index: 2;
 }
 
-/* Ken Burns zooming background animation */
 .slide-image {
     position: absolute;
     top: 0;
@@ -468,8 +467,8 @@ li {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.32) contrast(1.05);
-    transform: scale(1.15);
+    filter: none;
+    transform: scale(1.0);
     transition: transform 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -2038,3 +2037,699 @@ body, header, footer, .top-bar, .card-bg, .notice-card, .event-item-card, .conta
                 color 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* ==========================================================================
+   FOUNDERS SECTION STYLING (Premium Grid Layout)
+   ========================================================================== */
+.founders-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3.5rem;
+}
+
+.founder-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+}
+
+.founder-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: rgba(var(--primary-glow-rgb), 0.2);
+}
+
+.founder-img-container {
+    position: relative;
+    width: 100%;
+    height: 480px; /* Large premium height */
+    overflow: hidden;
+    background: #0f172a;
+}
+
+.founder-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 10%; /* Center alignment */
+    transition: transform var(--transition-slow);
+}
+
+.founder-card:hover .founder-img {
+    transform: scale(1.05);
+}
+
+.founder-award-badge {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    background: linear-gradient(135deg, #d97706, #b45309);
+    color: #ffffff;
+    padding: 0.8rem 1.2rem;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 2;
+}
+
+.founder-award-badge i {
+    font-size: 1.2rem;
+}
+
+.founder-info {
+    padding: 2.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.founder-role {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.founder-info h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.founder-initials {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.founder-qualifications {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.qual-badge {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.35rem 0.75rem;
+    border-radius: 50px;
+    letter-spacing: 0.02em;
+}
+
+[data-theme="dark"] .qual-badge {
+    background: rgba(0, 180, 216, 0.15);
+    color: var(--primary-color);
+}
+
+.founder-bio {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.founders-tribute-message {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    padding: 3rem;
+    position: relative;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    max-width: 1000px;
+    margin: 2rem auto 0 auto;
+}
+
+.tribute-quote-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    opacity: 0.15;
+    position: absolute;
+    top: 1.5rem;
+    left: 2rem;
+}
+
+.founders-tribute-message p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* Responsiveness for Founders Grid */
+@media (max-width: 992px) {
+    .founders-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .founder-img-container {
+        height: 400px;
+    }
+}
+
+/* ==========================================================================
+   LEADERSHIP TEAM SECTION STYLING (Premium 3-Column Grid)
+   ========================================================================== */
+.leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+}
+
+.leader-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+}
+
+.leader-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: rgba(var(--primary-glow-rgb), 0.2);
+}
+
+.leader-img-container {
+    width: 100%;
+    height: 380px; /* Uniform card size */
+    overflow: hidden;
+    background: #0f172a;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.leader-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 10%; /* Headshot centering */
+    transition: transform var(--transition-slow);
+}
+
+.leader-card:hover .leader-img {
+    transform: scale(1.05);
+}
+
+.leader-info {
+    padding: 2.2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.leader-role {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.leader-info h3 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+}
+
+.leader-qualification {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.leader-quote {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-top: auto;
+}
+
+.leader-quote i {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.leader-quote p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Responsiveness for Leadership Grid */
+@media (max-width: 992px) {
+    .leadership-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+}
+
+/* ==========================================================================
+   PROMOTIONAL MODAL POPUP (Admission & Toppers Highlight)
+   ========================================================================== */
+.promo-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 22, 26, 0.85); /* Deep cosmic dark backdrop */
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 1rem;
+}
+
+.promo-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.promo-modal-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 30px 70px rgba(0, 180, 216, 0.2);
+    width: 100%;
+    max-width: 950px;
+    overflow: hidden;
+    position: relative;
+    transform: scale(0.9) translateY(30px);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.promo-modal-overlay.show .promo-modal-card {
+    transform: scale(1) translateY(0);
+}
+
+.promo-modal-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    z-index: 10;
+}
+
+.promo-modal-close:hover {
+    background: var(--danger-color);
+    color: #ffffff;
+    border-color: var(--danger-color);
+    transform: rotate(90deg);
+}
+
+.promo-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+}
+
+/* Left side admission style */
+.promo-admission-col {
+    padding: 3.5rem;
+    background: linear-gradient(135deg, rgba(0, 175, 185, 0.05), rgba(17, 94, 89, 0.08));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border-color);
+}
+
+.promo-admission-badge {
+    align-self: flex-start;
+    background: linear-gradient(135deg, var(--accent-color), #b45309);
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 15px -3px var(--accent-glow);
+}
+
+.promo-admission-col h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.promo-admission-col p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.promo-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2.2rem;
+    padding: 1.25rem;
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.contact-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.promo-phone-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary-color) !important;
+    text-decoration: none !important;
+    transition: color var(--transition-fast);
+}
+
+.promo-phone-btn:hover {
+    color: var(--primary-dark) !important;
+}
+
+.promo-cta-btn {
+    align-self: flex-start;
+    padding: 0.9rem 2rem;
+    font-weight: 700;
+}
+
+/* Right side toppers style */
+.promo-toppers-col {
+    padding: 3.5rem;
+    background: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.promo-toppers-col h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 0.2rem;
+}
+
+.promo-toppers-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.promo-toppers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.promo-topper-item {
+    text-align: center;
+}
+
+.promo-topper-img-frame {
+    position: relative;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    aspect-ratio: 4/5;
+    margin-bottom: 1rem;
+    background: #0f172a;
+}
+
+.promo-topper-img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.promo-topper-item:hover .promo-topper-img-frame img {
+    transform: scale(1.05);
+}
+
+.topper-badge {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.3rem 0.75rem;
+    border-radius: 50px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    white-space: nowrap;
+}
+
+.topper-badge.class-10th {
+    background: linear-gradient(135deg, #00afb9, #115e59);
+}
+
+.topper-badge.class-12th {
+    background: linear-gradient(135deg, #d97706, #b45309);
+}
+
+.promo-topper-item h4 {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Responsiveness */
+@media (max-width: 850px) {
+    .promo-modal-card {
+        max-width: 480px;
+    }
+    .promo-modal-grid {
+        grid-template-columns: 1fr;
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+    .promo-admission-col {
+        padding: 2.5rem;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .promo-toppers-col {
+        padding: 2.5rem;
+    }
+    .promo-toppers-grid {
+        gap: 1.5rem;
+    }
+}
+
+/* Upgraded Promo Modal Header & Glow Visuals */
+.promo-admission-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.pulse-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    animation: pulse-green 1.8s infinite;
+}
+
+@keyframes pulse-green {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+.toppers-trophy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #ffffff;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    margin: 0 auto 0.75rem auto;
+    box-shadow: 0 10px 20px -5px rgba(217, 119, 6, 0.4);
+    animation: float-trophy 3s ease-in-out infinite;
+}
+
+@keyframes float-trophy {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
+}
+
+.promo-toppers-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.promo-action-buttons {
+    margin-top: auto;
+}
+
+/* ==========================================================================
+   GLOBAL LIGHTBOX MODAL STYLING
+   ========================================================================== */
+.lightbox-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 22, 26, 0.95); /* Deep dark background */
+    backdrop-filter: blur(15px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.lightbox-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(0.9);
+    transition: transform var(--transition-normal);
+}
+
+.lightbox-modal.show .lightbox-content {
+    transform: scale(1);
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.05);
+    object-fit: contain;
+}
+
+.lightbox-caption {
+    color: #e6f7f9;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: #ffffff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.lightbox-close:hover {
+    background: var(--danger-color);
+    border-color: var(--danger-color);
+    transform: rotate(90deg) scale(1.05);
+}
+
+/* Cursor pointer style to signify clickability on these images */
+.slide-image, .founder-img, .leader-img, .promo-topper-img-frame img, .gallery-item img, .about-main-image {
+    cursor: zoom-in;
+}
+

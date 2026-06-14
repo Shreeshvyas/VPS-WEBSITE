@@ -54,6 +54,33 @@
     </div>
 </section>
 
+<!-- Director message in detail -->
+{% if school_config.director_name %}
+<section class="section-padding" style="background-color: var(--bg-secondary); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+        <div class="about-welcome-grid" style="grid-template-columns: 0.8fr 1.2fr;">
+            <div style="text-align: center;">
+                {% if school_config.director_photo %}
+                    <img src="{{ school_config.director_photo.url }}" alt="{{ school_config.director_name }}" style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover; object-position: center top; border: 5px solid var(--primary-light); margin: 0 auto 1.5rem auto; box-shadow: var(--card-shadow);">
+                {% else %}
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=250&auto=format&fit=crop" alt="Director" style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover; object-position: center top; border: 5px solid var(--primary-light); margin: 0 auto 1.5rem auto; box-shadow: var(--card-shadow);">
+                {% endif %}
+                <h4 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700;">{{ school_config.director_name }}</h4>
+                <p style="color: var(--primary-color); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; margin-top: 0.2rem;">Director Message</p>
+            </div>
+            
+            <div>
+                <span class="subtitle-badge">Leadership Desk</span>
+                <h3 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">{{ school_config.director_title }}</h3>
+                <div style="color: var(--text-secondary); display: flex; flex-direction: column; gap: 1.25rem; font-size: 1.05rem;">
+                    {{ school_config.director_message|linebreaks }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
 <!-- Principal message in detail -->
 <section class="section-padding">
     <div class="container">

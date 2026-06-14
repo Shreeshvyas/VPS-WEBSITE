@@ -21,6 +21,14 @@ class SchoolConfig(models.Model):
     )
     principal_photo = models.ImageField(upload_to="school/", blank=True, null=True)
     
+    # Director's Section
+    director_name = models.CharField(max_length=100, default="Mr. Sanjay Vyas")
+    director_title = models.CharField(max_length=100, default="Director's Message")
+    director_message = models.TextField(
+        default="Education is not just about academic achievement but about shaping character and building futures. At Vyas Public School, we strive to create an environment where every child can discover their potential and develop into confident, responsible individuals."
+    )
+    director_photo = models.ImageField(upload_to="school/", blank=True, null=True)
+    
     # School Stats
     stat_students = models.IntegerField(default=1200, verbose_name="Number of Students")
     stat_teachers = models.IntegerField(default=80, verbose_name="Number of Teachers")
