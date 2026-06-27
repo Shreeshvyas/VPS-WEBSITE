@@ -1,0 +1,23 @@
+{
+  "name": "Vyas Public School",
+  "short_name": "Vyas Public School",
+  "description": "Vyas Public School Student and Staff Portal",
+  "start_url": "https://portal.vyaspublicschool.in/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ea580c",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "https://portal.vyaspublicschool.in/static/homepage/assets/img/lo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://portal.vyaspublicschool.in/static/homepage/assets/img/logo1.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

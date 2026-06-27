@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Vyas Public School</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  {% load static %}
+
+  <!-- PWA Manifest & Meta Tags -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#ea580c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="VPHS Portal">
+  <link rel="apple-touch-icon" href="{% static 'homepage/assets/img/lo.png' %}">
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((reg) => console.log('[Service Worker] Registered successfully:', reg.scope))
+          .catch((err) => console.error('[Service Worker] Registration failed:', err));
+      });
+    }
+  </script>
+
+  <!-- Favicons -->
+  {% if school_config.favicon %}
+    <link href="{{ school_config.favicon.url }}" rel="icon">
+  {% else %}
+    <link href="{% static 'homepage/assets/img/lo.png' %}" rel="icon">
+  {% endif %}
+  <link href="{% static 'homepage/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'homepage/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'homepage/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'homepage/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'homepage/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'homepage/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'homepage/assets/css/main.css' %}" rel="stylesheet">
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+    }
+
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      border-radius: 10px;
+      width: 600px;
+      max-width: 90%;
+      padding: 30px;
+      z-index: 1000;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      text-align: center;
+    }
+
+    #popup h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+      .carousel {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        overflow: hidden;
+        background-color: #fff;
+      }
+
+      .carousel img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: none;
+      }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    .popup-link img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .close-btn {
+      padding: 10px 20px;
+      background-color: crimson;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+  .director-photo {
+    width: 120px;              /* Controls image size */
+    height: 120px;
+    border-radius: 50%;        /* Makes it perfectly round */
+    border: 4px solid white;   /* Optional styling */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Soft shadow */
+    object-fit: cover;         /* Ensures image fills the circle nicely */
+    margin-right: 1.5rem;      /* Spacing from text */
+  }
+  </style>
+
+
+  <!-- =======================================================
+  * Template Name: Squadfree
+  * Template URL: https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  
+<div id="overlay"></div>
+
+  <div id="popup">
+    <h2>🎓 Our Toppers</h2>
+
+    <div class="carousel">
+      <img src="{% static 'homepage/assets/img/toppers/pic4.jpg' %}" class="active" alt="Topper 1">
+      <!-- <img src="https://via.placeholder.com/600x300?text=Topper+1" class="active" alt="Topper 1"> -->
+      <img src="{% static 'homepage/assets/img/toppers/pic2.jpg' %}">
+      <img src="{% static 'homepage/assets/img/toppers/pic5.jpg' %}">
+      <img src="{% static 'homepage/assets/img/toppers/pic1.jpg' %}">
+    </div>
+
+    <a href="https://www.google.com/maps/place/Vyas+Public+School/@21.8630624,75.9541916,17z/data=!3m1!4b1!4m6!3m5!1s0x3bd871a5e66f528f:0x2f552eb88b2ebe17!8m2!3d21.8630625!4d75.9590625!16s%2Fg%2F1hhxq0k71?entry=ttu&g_ep=EgoyMDI1MDcyOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="popup-link">
+      <!-- <img src="https://via.placeholder.com/600x100?text=Visit+Our+Academy" alt="Visit Us"> -->
+      <!-- <img src="{% static 'homepage/assets/img/location-mark.png' %}" alt="Visit Us" class="icon-of-visit-us"> -->
+      <p>Visit Us</p>
+    </a>
+
+    <br><br>
+    <button class="close-btn" onclick="closePopup()">Close</button>
+  </div>
+
+  <script>
+    // Show popup on page load
+    window.onload = function () {
+      document.getElementById("popup").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+      startCarousel();
+    };
+
+    // Close popup
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+
+    // Basic JavaScript Carousel
+    function startCarousel() {
+      let images = document.querySelectorAll(".carousel img");
+      let index = 0;
+
+      setInterval(() => {
+        images[index].classList.remove("active");
+        index = (index + 1) % images.length;
+        images[index].classList.add("active");
+      }, 3000); // Change image every 3 seconds
+    }
+  </script>
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        {% if school_config.logo %}
+          <img src="{{ school_config.logo.url }}" alt="{{ school_config.school_name }}">
+        {% else %}
+          <img src="{% static 'homepage/assets/img/logo1.png' %}">
+        {% endif %}
+        <!-- <img src="{% static 'homepage/assets/img/logo.png' %}" alt=""> -->
+        <h1 class="sitename">{{ school_config.school_name|default:"Vphs" }}</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#team">Team</a></li>
+          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#">Dropdown 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Deep Dropdown 3</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Dropdown 2</a></li>
+              <li><a href="#">Dropdown 3</a></li>
+              <li><a href="#">Dropdown 4</a></li>
+            </ul>
+          </li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <section id="hero" class="hero section accent-background">
+
+      <img src="{% static 'homepage/assets/img/front.jpg' %}" alt="">
+
+      <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
+        <h2>Welcome to Vyas Public School</h2>
+        <p>We are team of talented teachers making students future bright!</p>
+        <a href="#about" class="btn-scroll" title="Scroll Down"><i class="bi bi-chevron-down"></i></a>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>About Us</h2>
+        <p>"Education is the most powerful weapon which you can use to change the world." </p>
+      </div>
+
+      <div class="container">
+
+        <div class="row gy-5">
+
+          <div class="content col-xl-5 d-flex flex-column" data-aos="fade-up" data-aos-delay="100">
+            <h3>Why Choose us?</h3>
+            <ul>
+              <li>
+                Excellent Academic Programs: We offer a rigorous and well-rounded curriculum designed to challenge and inspire students at every grade level.
+              </li>
+              <li>
+                Experienced and Caring Faculty: Our teachers are passionate professionals dedicated to nurturing each student’s unique talents and potential.
+              </li>
+              <li>
+                Safe and Supportive Environment: We prioritize a welcoming, inclusive, and safe atmosphere where every child feels valued and confident.
+              </li>
+              <li>
+                Innovative Learning: With modern technology, hands-on projects, and creative teaching methods, we prepare students for the challenges of tomorrow.
+              </li>
+            </ul>
+            <a href="#" class="about-btn align-self-center align-self-xl-start"><span>About us</span> <i class="bi bi-chevron-right"></i></a>
+          </div>
+
+          <div class="col-xl-7" data-aos="fade-up" data-aos-delay="200">
+            <div class="row gy-4">
+              <div style="background-color: antiquewhite;padding: 60px;border-radius: 20px;">
+                    <div class="flex items-center mb-6" style="background-color: antiquewhite !important;">
+                        <!-- <img src="https://via.placeholder.com/120" alt="Director Shreesh Vyas" class="rounded-full border-4 border-white shadow-md mr-6"> -->
+                        {% if school_config.director_photo %}
+                            <img src="{{ school_config.director_photo.url }}" class="director-photo" alt="Director {{ school_config.director_name }}">
+                        {% else %}
+                            <img src="{% static 'homepage/assets/img/director pic.jpg' %}" class="director-photo" alt="Director Sanjay Vyas">
+                        {% endif %}
+                        <br>
+                        
+                        <div style="padding-top: 16px;">
+                            <h4 class="text-xl font-bold text-blue-800">{{ school_config.director_name|default:"Mr. Sanjay Vyas" }}</h4>
+                            <p class="text-blue-600">Director</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm" style="background-color: antiquewhite !important;">
+                        <blockquote class="text-gray-700 italic mb-4">
+                            "{{ school_config.director_message|default:"Education is not just about academic achievement but about shaping character and building futures. At Vyas Public School, we strive to create an environment where every child can discover their potential and develop into confident, responsible individuals."|linebreaksbr }}"
+                        </blockquote>
+                    </div>
+                  </div>
+
+              <!-- Principal Message Card -->
+              <div style="background-color: #e6f7f4; padding: 60px; border-radius: 20px; margin-top: 24px;">
+                    <div class="flex items-center mb-6" style="background-color: #e6f7f4 !important;">
+                        {% if school_config.principal_photo %}
+                            <img src="{{ school_config.principal_photo.url }}" class="director-photo" alt="Principal {{ school_config.principal_name }}">
+                        {% else %}
+                            <img src="{% static 'homepage/assets/img/testimonials/teacher6.jpg' %}" class="director-photo" alt="Principal Shreesh Vyas">
+                        {% endif %}
+                        <br>
+                        
+                        <div style="padding-top: 16px;">
+                            <h4 class="text-xl font-bold text-teal-800">{{ school_config.principal_name|default:"Shreesh Vyas" }}</h4>
+                            <p class="text-teal-600">Principal</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm" style="background-color: #e6f7f4 !important;">
+                        <blockquote class="text-gray-700 italic mb-4">
+                            "{{ school_config.principal_message|default:"Welcome to Vyas Public School. We are dedicated to fostering academic excellence and character building. Our goal is to prepare students to face global challenges with confidence and integrity."|linebreaksbr }}"
+                        </blockquote>
+                    </div>
+                  </div>
+
+              
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /About Section -->
+
+    <!-- Services Section -->
+    <section id="services" class="services section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Our Streams</h2>
+        <p>We are providing streams mentioned below!</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="bi bi-activity icon"></i></div>
+              <h4><a href="service-details.html" class="stretched-link">Science</a></h4>
+              <p>Explore physics, chemistry, biology, and math, preparing students for medical, engineering, and research careers.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="bi bi-bounding-box-circles icon"></i></div>
+              <h4><a href="service-details.html" class="stretched-link">Biology</a></h4>
+              <p>Dive deep into life sciences, studying organisms, genetics, health, and ecosystems for medical and research careers.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="bi bi-calendar4-week icon"></i></div>
+              <h4><a href="service-details.html" class="stretched-link">Commerce</a></h4>
+              <p>Focus on business, economics, accountancy, and finance to build future entrepreneurs, analysts, and professionals.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="bi bi-broadcast icon"></i></div>
+              <h4><a href="service-details.html" class="stretched-link">Agriculture</a></h4>
+              <p>Learn modern farming, soil science, agribusiness, and sustainability to shape the future of food production.
+              </p>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Services Section -->
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats section light-background">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item">
+              <i class="bi bi-emoji-smile"></i>
+              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Happy Parents</strong></p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item">
+              <i class="bi bi-journal-richtext"></i>
+              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Projects</strong> <span>done by students under teachers guidance</span></p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item">
+              <i class="bi bi-headset"></i>
+              <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Hours Of Support</strong> <span>aut commodi quaerat</span></p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item">
+              <i class="bi bi-people"></i>
+              <span data-purecounter-start="0" data-purecounter-end="100" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Block & District Toppers</strong> <span>since 1994</span></p>
+            </div>
+          </div><!-- End Stats Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Stats Section -->
+
+    <!-- Call To Action Section -->
+    <section id="call-to-action" class="call-to-action section accent-background">
+
+      <img src="{% static 'homepage/assets/img/cta-bg.jpg' %}" alt="">
+
+      <div class="container">
+        <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+          <div class="col-xl-10">
+            <div class="text-center">
+              <h3>Join Our School Community</h3>
+              <p>
+                Discover a nurturing environment where academic excellence meets personal growth. Enroll now to secure your child’s bright future.
+              </p>
+              <a class="cta-btn" href="/admissions">Apply Now</a>
+              <!-- or: <a class="cta-btn" href="/contact">Contact Us</a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </section><!-- /Call To Action Section -->
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Photo Gallery</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-app">App</li>
+            <li data-filter=".filter-product">Product</li>
+            <li data-filter=".filter-branding">Branding</li>
+            <li data-filter=".filter-books">Books</li>
+          </ul><!-- End Portfolio Filters -->
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="{% static 'homepage/assets/img/portfolio/app-1.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>App 1</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <a href="{% static 'homepage/assets/img/portfolio/app-1.jpg' %}" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="{% static 'homepage/assets/img/portfolio/product-1.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Product 1</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <a href="{% static 'homepage/assets/img/portfolio/product-1.jpg' %}" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="{% static 'homepage/assets/img/portfolio/branding-1.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Branding 1</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <a href="{% static 'homepage/assets/img/portfolio/branding-1.jpg' %}" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+              <img src="{% static 'homepage/assets/img/portfolio/books-1.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Books 1</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <a href="{% static 'homepage/assets/img/portfolio/books-1.jpg' %}" title="Branding 1" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="{% static 'homepage/assets/img/portfolio/app-2.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>App 2</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <a href="{% static 'homepage/assets/img/portfolio/app-2.jpg' %}" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="{% static 'homepage/assets/img/portfolio/product-2.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Product 2</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <a href="{% static 'homepage/assets/img/portfolio/product-2.jpg' %}" title="Product 2" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="{% static 'homepage/assets/img/portfolio/branding-2.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Branding 2</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <a href="{% static 'homepage/assets/img/portfolio/branding-2.jpg' %}" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+              <img src="{% static 'homepage/assets/img/portfolio/books-2.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Books 2</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <a href="{% static 'homepage/assets/img/portfolio/books-2.jpg' %}" title="Branding 2" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="{% static 'homepage/assets/img/portfolio/app-3.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>App 3</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <a href="{% static 'homepage/assets/img/portfolio/app-3.jpg' %}" title="App 3" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="{% static 'homepage/assets/img/portfolio/product-3.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Product 3</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <a href="{% static 'homepage/assets/img/portfolio/product-3.jpg' %}" title="Product 3" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="{% static 'homepage/assets/img/portfolio/branding-3.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Branding 3</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <a href="{% static 'homepage/assets/img/portfolio/branding-3.jpg' %}" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+              <img src="{% static 'homepage/assets/img/portfolio/books-3.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Books 3</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <a href="{% static 'homepage/assets/img/portfolio/books-3.jpg' %}" title="Branding 3" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+          </div><!-- End Portfolio Container -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Section -->
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section light-background">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Our Teachers</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              },
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 1,
+                  "spaceBetween": 40
+                },
+                "1200": {
+                  "slidesPerView": 3,
+                  "spaceBetween": 1
+                }
+              }
+            }
+          </script>
+          <div class="swiper-wrapper">
+
+            {% for teacher in teachers_list %}
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>{{ teacher.qualification|default:"Dedicated and passionate educator at Vyas Public School." }}</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+                {% if teacher.photo %}
+                  <img src="{{ teacher.photo.url }}" class="testimonial-img" alt="{{ teacher.name }}">
+                {% else %}
+                  <img src="{% static 'homepage/assets/img/testimonials/teacher1.jpg' %}" class="testimonial-img" alt="{{ teacher.name }}">
+                {% endif %}
+                <h3>{{ teacher.name }}</h3>
+                <h4>{{ teacher.designation }}</h4>
+              </div>
+            </div><!-- End testimonial item -->
+            {% empty %}
+            <!-- Fallback static items if DB is empty -->
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>TGT English</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+                <img src="{% static 'homepage/assets/img/testimonials/teacher1.jpg' %}" class="testimonial-img" alt="Dharmendra Tirole">
+                <h3>Dharmendra Tirole</h3>
+                <h4>English Teacher</h4>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+
+    </section><!-- /Testimonials Section -->
+
+    <!-- Team Section -->
+    <section id="team" class="team section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Leadership & Direction</h2>
+        <p>Dedicated, experienced, and passionate educators who inspire students through knowledge, care, innovation, and personal attention.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-5 justify-content-center">
+
+          {% if vice_principal_teacher %}
+          <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="200">
+            <div class="team-member">
+              <div class="member-img">
+                {% if vice_principal_teacher.photo %}
+                  <img src="{{ vice_principal_teacher.photo.url }}" style="height: 400px; width: 100%; object-fit: cover;" class="img-fluid" alt="{{ vice_principal_teacher.name }}">
+                {% else %}
+                  <img src="{% static 'homepage/assets/img/testimonials/teacher6.jpg' %}" style="height: 400px; width: 100%; object-fit: cover;" class="img-fluid" alt="Yogita Vyas">
+                {% endif %}
+              </div>
+              <div class="member-info">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter-x"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+                <h4>{{ vice_principal_teacher.name }}</h4>
+                <span>{{ vice_principal_teacher.designation }}</span>
+              </div>
+            </div>
+          </div><!-- End Team Member -->
+          {% else %}
+          <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="200">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="{% static 'homepage/assets/img/testimonials/teacher6.jpg' %}" style="height: 400px; width: 100%; object-fit: cover;" class="img-fluid" alt="Yogita Vyas">
+              </div>
+              <div class="member-info">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter-x"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+                <h4>Yogita Vyas</h4>
+                <span>Vice Principal</span>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if director_teacher %}
+          <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="400">
+            <div class="team-member">
+              <div class="member-img">
+                {% if director_teacher.photo %}
+                  <img src="{{ director_teacher.photo.url }}" style="height: 400px; width: 100%; object-fit: cover;" class="img-fluid" alt="{{ director_teacher.name }}">
+                {% else %}
+                  <img src="{% static 'homepage/assets/img/director pic.jpg' %}" style="height: 400px; width: 100%; object-fit: cover;" class="img-fluid" alt="Sanjay Vyas">
+                {% endif %}
+              </div>
+              <div class="member-info">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter-x"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+                <h4>{{ director_teacher.name }}</h4>
+                <span>{{ director_teacher.designation }}</span>
+              </div>
+            </div>
+          </div><!-- End Team Member -->
+          {% else %}
+          <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="400">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="{% static 'homepage/assets/img/director pic.jpg' %}" style="height: 400px; width: 100%; object-fit: cover;" class="img-fluid" alt="Sanjay Vyas">
+              </div>
+              <div class="member-info">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter-x"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+                <h4>Sanjay Vyas</h4>
+                <span>Director</span>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+        </div>
+
+      </div>
+
+    </section><!-- /Team Section -->
+
+    <!-- Pricing Section -->
+    <!-- <section id="pricing" class="pricing section">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Pricing</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div>
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="pricing-item">
+              <h3>Free Plan</h3>
+              <h4><sup>$</sup>0<span> / month</span></h4>
+              <ul>
+                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
+                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
+                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
+                <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span></li>
+                <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
+              </ul>
+              <a href="#" class="buy-btn">Buy Now</a>
+            </div>
+          </div>
+
+          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="pricing-item featured">
+              <h3>Business Plan</h3>
+              <h4><sup>$</sup>29<span> / month</span></h4>
+              <ul>
+                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
+                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
+                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
+                <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
+                <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
+              </ul>
+              <a href="#" class="buy-btn">Buy Now</a>
+            </div>
+          </div>
+
+          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="pricing-item">
+              <h3>Developer Plan</h3>
+              <h4><sup>$</sup>49<span> / month</span></h4>
+              <ul>
+                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
+                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
+                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
+                <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
+                <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
+              </ul>
+              <a href="#" class="buy-btn">Buy Now</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section> -->
+
+    <section id="faq" class="faq section light-background">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Frequently Asked Questions</h2>
+        <p>FAQS</p>
+      </div>
+
+      <div class="container">
+
+        <div class="row faq-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-5 d-flex">
+            <i class="bi bi-question-circle"></i>
+            <h4>What is the admission process at Vyas Public School?</h4>
+          </div>
+          <div class="col-lg-7">
+            <p>
+              Admission forms can be collected from the school office or downloaded from our website. Entrance tests and interviews may be required for certain classes.
+            </p>
+          </div>
+        </div>
+
+        <div class="row faq-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-5 d-flex">
+            <i class="bi bi-question-circle"></i>
+            <h4>What documents are required for admission?</h4>
+          </div>
+          <div class="col-lg-7">
+            <p>Required documents typically include:</p>
+            <ul style="list-style-type: disc; padding-left: 20px;">
+              <li>Birth certificate</li>
+              <li>Aadhar card copy</li>
+              <li>Previous school report card (if applicable)</li>
+              <li>Passport-sized photographs</li>
+              <li>Transfer certificate (for Grades 2 and above)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row faq-item" data-aos="fade-up" data-aos-delay="300">
+          <div class="col-lg-5 d-flex">
+            <i class="bi bi-question-circle"></i>
+            <h4> When do admissions start?</h4>
+          </div>
+          <div class="col-lg-7">
+            <p>
+              Started from 1st July.
+            </p>
+          </div>
+        </div>
+
+        <div class="row faq-item" data-aos="fade-up" data-aos-delay="400">
+          <div class="col-lg-5 d-flex">
+            <i class="bi bi-question-circle"></i>
+            <h4>What curriculum does Vyas Public School follow?</h4>
+          </div>
+          <div class="col-lg-7">
+            <p>
+              We follow the  (Central Board of Secondary Education) curriculum.
+            </p>
+          </div>
+        </div>
+
+        <div class="row faq-item" data-aos="fade-up" data-aos-delay="500">
+          <div class="col-lg-5 d-flex">
+            <i class="bi bi-question-circle"></i>
+            <h4>Tempus quam pellentesque nec nam aliquam sem et tortor consequat?</h4>
+          </div>
+          <div class="col-lg-7">
+            <p>
+              Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Contact Us</h2>
+        <p>Have questions? We’re here to help.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-5">
+
+            <div class="info-wrap">
+              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+                <i class="bi bi-geo-alt flex-shrink-0"></i>
+                <div>
+                  <h3>Address</h3>
+                  <p>{{ school_config.address|default:"1, Housing Board Colony, Bhikangaon\nPincode - 451331"|linebreaksbr }}</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+                <i class="bi bi-telephone flex-shrink-0"></i>
+                <div>
+                  <h3>Call Us</h3>
+                  <p>{{ school_config.phone|default:"+91- 9977956175\n+91- 8717860914"|linebreaksbr }}</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+                <i class="bi bi-envelope flex-shrink-0"></i>
+                <div>
+                  <h3>Email Us</h3>
+                  <p>{{ school_config.email|default:"vpsbhikangaon@gmail.com" }}</p>
+                </div>
+              </div><!-- End Info Item -->
+              <!-- https://www.google.com/maps/place/Vyas+Public+School/@21.8630625,75.9564876,17z/data=!3m1!4b1!4m6!3m5!1s0x3bd871a5e66f528f:0x2f552eb88b2ebe17!8m2!3d21.8630625!4d75.9590625!16s%2Fg%2F1hhxq0k71?entry=ttu&g_ep=EgoyMDI1MDYxNi4wIKXMDSoASAFQAw%3D%3D -->
+
+              <iframe src="https://www.google.com/maps/embed?pb=!3m1!4b1!4m6!3m5!1s0x3bd871a5e66f528f:0x2f552eb88b2ebe17!8m2!3d21.8630625!4d75.9590625!16s%2Fg%2F1hhxq0k71?entry=ttu&g_ep=EgoyMDI1MDYxNi4wIKXMDSoASAFQAw%3D%3D!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              {% csrf_token %}
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <label for="name-field" class="pb-2">Your Name</label>
+                  <input type="text" name="name" id="name-field" class="form-control" required="">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="email-field" class="pb-2">Your Email</label>
+                  <input type="email" class="form-control" name="email" id="email-field" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <label for="subject-field" class="pb-2">Subject</label>
+                  <input type="text" class="form-control" name="subject" id="subject-field" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <label for="message-field" class="pb-2">Message</label>
+                  <textarea class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                  <button type="submit">Send Message</button>
+                </div>
+
+              </div>
+            </form>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Contact Section -->
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">{{ school_config.school_name|default:"VPHS" }}</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>{{ school_config.address|default:"1, Housing Board Colony\nBhikangaon"|linebreaksbr }}</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>{{ school_config.phone|default:"+91-8717860914"|linebreaksbr }}</span></p>
+            <p><strong>Email:</strong> <span>{{ school_config.email|default:"vpsbhikangaon@gmail.com" }}</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Streams</h4>
+          <ul>
+            <li><a href="#">Science</a></li>
+            <li><a href="#">Biology</a></li>
+            <li><a href="#">Commerce</a></li>
+            <li><a href="#">Agriculture</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4>Our Newsletter</h4>
+          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+          <form action="forms/newsletter.php" method="post" class="php-email-form">
+            {% csrf_token %}
+            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  {% load static %}
+  <script src="{% static 'homepage/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'homepage/assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'homepage/assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'homepage/assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'homepage/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'homepage/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'homepage/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'homepage/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'homepage/assets/js/main.js' %}"></script>
+
+
+</body>
+
+</html>
