@@ -7,6 +7,24 @@
     <title>{% if title %}{{ title }} | {% endif %}{{ school_config.school_name }}</title>
     <meta name="description" content="Welcome to {{ school_config.school_name }}. Fostering academic excellence, innovation, and character building. Explore our facilities, faculty, and programs.">
     
+    <!-- PWA Manifest & Meta Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ea580c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="VPHS Portal">
+    <link rel="apple-touch-icon" href="{% static 'homepage/assets/img/lo.png' %}">
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((reg) => console.log('[Service Worker] Registered successfully:', reg.scope))
+            .catch((err) => console.error('[Service Worker] Registration failed:', err));
+        });
+      }
+    </script>
+    
     <!-- Favicon -->
     {% if school_config.favicon %}
         <link rel="shortcut icon" href="{{ school_config.favicon.url }}" type="image/x-icon">
@@ -101,14 +119,8 @@
                     {% if school_config.facebook_url %}
                         <a href="{{ school_config.facebook_url }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
                     {% endif %}
-                    {% if school_config.twitter_url %}
-                        <a href="{{ school_config.twitter_url }}" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-                    {% endif %}
                     {% if school_config.instagram_url %}
                         <a href="{{ school_config.instagram_url }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                    {% endif %}
-                    {% if school_config.youtube_url %}
-                        <a href="{{ school_config.youtube_url }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
                     {% endif %}
                 </div>
             </div>
@@ -146,7 +158,7 @@
         <div class="footer-bottom">
             <div class="container footer-bottom-content">
                 <p>&copy; 2026 {{ school_config.school_name }}. All rights reserved.</p>
-                <p>Designed with <i class="fa-solid fa-heart" style="color: var(--accent-color);"></i> for Academic Excellence</p>
+                <!-- <p>Designed with <i class="fa-solid fa-heart" style="color: var(--accent-color);"></i> for Academic Excellence</p> -->
             </div>
         </div>
     </footer>
