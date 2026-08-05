@@ -459,17 +459,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// 11. PRELOADER FADEOUT (Runs after assets are fully loaded)
-window.addEventListener('load', () => {
+// 11. PRELOADER FADEOUT (Runs after assets are fully loaded with a fallback)
+const hidePreloader = () => {
     const preloader = document.getElementById('preloader');
-    if (preloader) {
+    if (preloader && !preloader.classList.contains('faded-out')) {
+        preloader.classList.add('faded-out');
         preloader.style.opacity = '0';
         preloader.style.visibility = 'hidden';
         setTimeout(() => {
             preloader.remove();
         }, 500);
     }
-});
+};
+
+window.addEventListener('load', hidePreloader);
+
+// Fallback: Hide preloader after 1.5 seconds max
+setTimeout(hidePreloader, 1500);
 
 // 12. PROMO MODAL POPUP
 window.addEventListener('load', () => {
